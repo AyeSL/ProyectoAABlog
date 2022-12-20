@@ -1,0 +1,35 @@
+{% extends "componentes/padre.html" %}
+{% load static %}
+
+{% block contenido %}
+
+<h2>
+    <a class="btn btn-outline-success btn-sm" href="{% url 'home' %}" role="button">👈Volver</a>
+    PUBLICACIÓN ID: {{id}}
+</h2>
+<hr>
+{% if posts %}
+{% for p  in posts %}
+<div class="card mb-3">
+    
+    <span class="badge bg-info">{{p.categoria | upper}}</span>
+    <div class="card-body">
+            <h4 class="lead text-end text-muted " style="margin-left:50%">🗓{{p.fecha_creacion | date}}</h4>
+            <h3 class="card-title">{{p.titulo}} </h3>
+            <h5 class="card-subtitle text-muted">{{p.subtitulo}}</h5>
+    </div>
+    <div class="card-body">
+        <p>{{p.descripcion}}</p>
+        <p class="card-text" style="font-size:20px">{{p.contenido}}</p>
+    </div>
+    <div class="card-footer text-end lead">
+        <p>Por <I>{{p.autor}}</I></p>
+    </div> 
+    
+</div>
+{% endfor %}
+{% else %}
+        <h2 class="lead">Ouchh....No se encontró el post ID n° {{id}} !!😬</h2>
+        <p>Te gustaría crear un post?? <br><br> <a type="button" class="btn btn-info" href="{% url 'post_create' %}">Crear nuevo post!!</a></p>
+ {% endif %}
+{% endblock %}
